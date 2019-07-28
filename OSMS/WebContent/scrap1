@@ -1,0 +1,45 @@
+create table userdetails_1130437(username varchar2(50) primary key,password varchar2(50) not null)
+insert into userdetails_1130437 values('phanee','kumar'); 
+
+drop table projectproducttable_1130437;
+create table projectproducttable_1130437
+(
+productId varchar2(1000) primary key,
+productName varchar2(20) not null,
+Description varchar2(50) not null,
+Category varchar2(20) not null,
+Status varchar2(20)  not null,
+priceperquantity number(10,2) not null,
+quantity number(10) not null,
+check(Category='Kids Apparel' or Category='Mens Apparel' or Category='Womens Apparel' or Category='Home Appliances' ),
+check (priceperquantity>0),
+check(quantity>0),
+check(status = 'open' or status = 'close')
+
+)
+create sequence product_seq
+start with 100
+increment by 1
+select product_seq.nextval from dual
+select product_seq.currval from dual
+drop sequence product_seq
+SELECT last_number
+  FROM user_sequences
+ WHERE sequence_name = 'product_seq';
+ select last_number from dba_sequences where SEQUENCE_NAME = 'product_seq';
+ select * from projectproducttable_1130437
+
+delete from projectproducttable_1130437 where productId=100
+insert into projectproducttable_1130437 values(product_seq.nextval,'SHIRT','FULL-SLEEVE','Mens Apparel','open',500.00,50);
+insert into projectproducttable_1130437 values(product_seq.nextval,'BAG','CHEAP','Womens Apparel','open',900.00,15);
+insert into projectproducttable_1130437 values(product_seq.nextval,'SHIRT','SMALL','Kids Apparel','close',300.00,35);
+insert into projectproducttable_1130437 values(product_seq.nextval,'JEANS','EXPENSIVE','Mens Apparel','open',800.00,45);
+insert into projectproducttable_1130437 values('PROD_104','SANDALS','HEALED','Womens Apparel','close',600.00,63);
+insert into projectproducttable_1130437 values('PROD_105','TOY','CARS','Kids Apparel','open',100.00,10);
+insert into projectproducttable_1130437 values('PROD_106','SHOES','COSTLY','Mens Apparel','open',800.00,20);
+insert into projectproducttable_1130437 values('PROD_107','TSHIRT','SLEEVED','Womens Apparel','close',750.00,30);
+insert into projectproducttable_1130437 values('PROD_108','ELECTRONIC','PENDRIVE','Home Appliances','close',2500.00,10);
+insert into projectproducttable_1130437 values('PROD_109','FURNITURE','SOFA','Home Appliances','open',1500.00,5);
+
+
+update  projectproducttable_1130437 set  priceperquantity= 400.00, quantity = 25 , Status = 'open' where productId = 'PROD_100'
